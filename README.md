@@ -1,4 +1,3 @@
-# Livraria
 <h1> CRUD de umas Livraria feito com express </h1> 
 Para rodar o projeto digite: 
 ``` 
