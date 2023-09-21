@@ -1,6 +1,6 @@
 import express, { response } from "express";
 import conectaNaDatabase from "./config/dbConnect.js";
-import livro  from "./models/Livro.js";
+import routes  from "./routes/index.js";
 
 
 const conexao = await conectaNaDatabase();
@@ -14,9 +14,11 @@ conexao.once("open", () =>{
 })
 
 const app = express();
+routes(app);
+/*
 app.use(express.json());
 
-/* const livros = [
+ const livros = [
     {id: 1, "titulo": "Senhor dos Aneis"},
     {id: 2, "titulo": "O hobbit"}
 ]
@@ -27,8 +29,6 @@ function buscaLivro(id) {
         return livro.id === Number(id)
     })
 }
- */
-
 //passa para o express a  responsabilidade de gerenciar as rotas
 app.get('/' , (requisisao, resposta) => {
     resposta.status(200).send('Curso de node.js');
@@ -37,7 +37,7 @@ app.get('/' , (requisisao, resposta) => {
 app.get('/livros', async (requisisao, resposta) => {
     const listaLivros = await livro.find({});
     resposta.status(200).json(listaLivros)
-})
+}) 
 
 app.get("/livros/:id", (requisisao, resposta) =>{
     const index = buscaLivro(requisisao.params.id);
@@ -55,7 +55,7 @@ app.put("/livros/:id", (requisisao, resposta)=>{
     livros[index].titulo = requisisao.body.titulo;
     resposta.status(200).json(livros);
 })
-
+*/
 app.delete("/livros/:id", (requisisao, resposta) => {
     const index = buscaLivro(requisisao.params.id);
     livros.splice(index, 1);
